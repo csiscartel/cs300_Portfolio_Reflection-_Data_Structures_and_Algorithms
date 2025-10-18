@@ -1,0 +1,12 @@
+FUNCTION printCourseInfo(tree, courseNumber)
+    SET course = SEARCH for courseNumber in tree
+    IF course is found
+        PRINT course.courseNumber + ": " + course.courseTitle
+        IF course.prerequisites is empty
+            PRINT "Prerequisites: None"
+        ELSE
+            PRINT "Prerequisites: "
+            FOR each prereq in course.prerequisites
+                PRINT prereq
+    ELSE
+        PRINT "Course not found"

@@ -1,0 +1,26 @@
+FUNCTION loadCoursesFromFile(fileName)
+    CREATE empty binary search tree courseTree
+    OPEN file with fileName
+    IF file cannot be opened
+        PRINT "Error: Unable to open file"
+        RETURN
+
+    FOR each line in file
+        SPLIT line by delimiter (e.g., comma) INTO tokens
+        IF number of tokens < 2
+            PRINT "Error: Invalid format, line has fewer than 2 fields"
+            CONTINUE to next line
+
+        SET courseNumber = first token
+        SET courseTitle = second token
+        SET prerequisites = remaining tokens (if any)
+
+        CREATE new Course object with courseNumber, courseTitle, prerequisites
+        INSERT Course object into courseTree
+
+    CLOSE file
+
+    FOR each course in courseTree (using in-order traversal)
+        FOR each prerequisite in course.prerequisites
+            IF prerequisite not found in courseTree
+                PRINT "Error: Prerequisite " + prerequisite + " does not exist in data"

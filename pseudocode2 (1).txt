@@ -1,0 +1,22 @@
+CLASS Course
+    courseNumber
+    courseTitle
+    prerequisites (list)
+
+FUNCTION insertCourse(tree, course)
+    IF tree is empty
+        tree.root = new Node(course)
+    ELSE
+        CALL recursiveInsert(tree.root, course)
+
+FUNCTION recursiveInsert(node, course)
+    IF course.courseNumber < node.course.courseNumber
+        IF node.left is null
+            node.left = new Node(course)
+        ELSE
+            recursiveInsert(node.left, course)
+    ELSE
+        IF node.right is null
+            node.right = new Node(course)
+        ELSE
+            recursiveInsert(node.right, course)
